@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Address book</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <app-address-item
+      *ngFor="let address of addresses"
+      [name]="address.name"
+      [phone]="address.phone"
+      [id]="address.id"
+    >
+    </app-address-item>
+  </ion-list>
+</ion-content>

@@ -35,3 +35,8 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+body {
+  background-color: #f9f9f9; /* a soft white/very light gray */
+  margin: 0; /* reset default margin */
+}

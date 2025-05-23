@@ -2,18 +2,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { ContactsPage } from './contacts.page';
+// import { AddressPage } from './address.page';
 import { RouterModule, Routes } from '@angular/router';
-
+import { AddressItemComponent } from './address-item/address-item.component';
+import { AddressPage } from './address.page';
+// contact
 const routes: Routes = [
   {
     path: '',
-    component: ContactsPage,
+    component: AddressPage,
   },
 ];
 
 @NgModule({
-  declarations: [ContactsPage],
+  declarations: [AddressItemComponent, AddressPage],
   imports: [CommonModule, IonicModule, RouterModule.forChild(routes)],
 })
-export class ContactsPageModule {}
+export class AddressPageModule {}
