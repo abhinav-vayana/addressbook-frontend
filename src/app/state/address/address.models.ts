@@ -5,9 +5,8 @@ export interface Address {
   email: string;
   phonenumber: string;
   address: string;
-  created_at: number;
-  updated_at: number;
 }
+
 export interface AddressState {
   addresses: Address[];
   loading: boolean;

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AddressItemComponent } from './address-item/address-item.component';
 import { Address } from './address-item/address.model';
+import * as AddressSelectors from '../state/address/address.selectors';
+import * as AddressActions from '../state/address/address.actions';
+import { AppState } from '@capacitor/app';
 
 @Component({
   selector: 'app-address',
@@ -9,13 +13,12 @@ import { Address } from './address-item/address.model';
   styleUrls: ['./address.page.scss'],
 })
 export class AddressPage implements OnInit {
-  addresses: Address[] = [];
-  constructor() {}
+  addresses$ = this.store.select(AddressSelectors.selectAllAddresses);
+  loading$ = this.store.select(AddressSelectors.selectLoading);
+  error$ = this.store.select(AddressSelectors.selectError);
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.addresses = [
-      { id: '1', name: 'Abhi', phone: '123456' },
-      { id: '2', name: 'Abhinav', phone: '123456' },
-    ];
+    this.store.dispatch(AddressActions.loadAddresses());
   }
 }

@@ -1,15 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Address book</ion-title>
+    <ion-title>Address Book</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ng-container *ngIf="loading$ | async">Loading addresses...</ng-container>
+  <ng-container *ngIf="error$ | async as errorMsg">
+    <p class="error">{{ errorMsg }}</p>
+  </ng-container>
+
+  <ion-list *ngIf="(addresses$ | async) as addresses">
     <app-address-item
       *ngFor="let address of addresses"
-      [name]="address.name"
-      [phone]="address.phone"
+      [name]="address.firstname"
+      [phone]="address.phonenumber"
       [id]="address.id"
     >
     </app-address-item>
