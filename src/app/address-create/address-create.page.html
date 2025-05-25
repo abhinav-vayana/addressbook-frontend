@@ -6,17 +6,27 @@
 
 <ion-content>
   <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-    <ion-item
+    <ng-container
       *ngFor="let field of ['firstname', 'lastname', 'email', 'phonenumber', 'address']"
     >
-      <ion-label position="floating">{{ field | titlecase }}</ion-label>
-      <ion-input
-        [type]="field === 'email' ? 'email' : 'text'"
-        formControlName="{{field}}"
-      ></ion-input>
-    </ion-item>
-    <ion-button expand="full" type="submit" [disabled]="addressForm.invalid"
-      >Submit</ion-button
-    >
+      <ion-item>
+        <ion-label position="floating">{{ field | titlecase }}</ion-label>
+        <ion-input
+          [type]="field === 'email' ? 'email' : 'text'"
+          [formControlName]="field"
+        ></ion-input>
+      </ion-item>
+
+      <!-- Error message outside ion-item -->
+      <div *ngIf="isFieldInvalid(field)">
+        <ion-text color="danger">
+          <p class="ion-padding-start">{{ getErrorMessage(field) }}</p>
+        </ion-text>
+      </div>
+    </ng-container>
+
+    <ion-button expand="full" type="submit" [disabled]="addressForm.invalid">
+      Submit
+    </ion-button>
   </form>
 </ion-content>

@@ -9,6 +9,14 @@ import { createAddress } from 'src/app/state/address/address.actions';
   standalone: false,
 })
 export class AddressCreateComponent {
+  fieldLabels: { [key: string]: string } = {
+    firstname: 'First name',
+    lastname: 'Last name',
+    email: 'Email',
+    phonenumber: 'Phone number',
+    address: 'Address',
+  };
+
   addressForm: FormGroup;
 
   constructor(private fb: FormBuilder, private store: Store) {
@@ -25,5 +33,21 @@ export class AddressCreateComponent {
     if (this.addressForm.valid) {
       this.store.dispatch(createAddress({ address: this.addressForm.value }));
     }
+  }
+
+  isFieldInvalid(field: string): boolean {
+    const control = this.addressForm.get(field);
+    return !!control && control.invalid && control.touched;
+  }
+
+  getErrorMessage(field: string): string {
+    const control = this.addressForm.get(field);
+    if (control?.hasError('required')) {
+      return `${field} is required`;
+    }
+    if (field === 'email' && control?.hasError('email')) {
+      return `Invalid email address`;
+    }
+    return '';
   }
 }
