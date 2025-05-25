@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-address-item',
@@ -13,4 +13,9 @@ export class AddressItemComponent implements OnInit {
   @Input() id!: string;
   @Input() name!: string;
   @Input() phone!: string;
+  @Output() delete = new EventEmitter<string>();
+
+  onDelete() {
+    this.delete.emit(this.id);
+  }
 }

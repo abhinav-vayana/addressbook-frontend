@@ -21,4 +21,7 @@ export class AddressPage implements OnInit {
   ngOnInit() {
     this.store.dispatch(AddressActions.loadAddresses());
   }
+  onDeleteAddress(id: string) {
+    this.store.dispatch(AddressActions.deleteAddress({ id }));
+  }
 }

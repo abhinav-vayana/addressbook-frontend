@@ -10,3 +10,18 @@ export const loadAddressesFailure = createAction(
   '[Address] Load Addresses Failure',
   props<{ error: string }>()
 );
+
+export const deleteAddress = createAction(
+  '[Address] Delete Address',
+  props<{ id: string }>()
+);
+
+export const deleteAddressSuccess = createAction(
+  '[Address] Delete Address Success',
+  props<{ id: string }>()
+);
+
+export const deleteAddressFailure = createAction(
+  '[Address] Delete Address Failure',
+  props<{ error: string }>()
+);
