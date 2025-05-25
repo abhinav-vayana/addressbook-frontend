@@ -15,4 +15,7 @@ export class AddressApiService {
   deleteAddress(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+  createAddress(address: Address): Observable<Address> {
+    return this.http.post<Address>(`${this.baseUrl}/create`, address);
+  }
 }

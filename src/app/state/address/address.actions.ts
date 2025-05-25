@@ -10,7 +10,7 @@ export const loadAddressesFailure = createAction(
   '[Address] Load Addresses Failure',
   props<{ error: string }>()
 );
-
+//Delete
 export const deleteAddress = createAction(
   '[Address] Delete Address',
   props<{ id: string }>()
@@ -23,5 +23,18 @@ export const deleteAddressSuccess = createAction(
 
 export const deleteAddressFailure = createAction(
   '[Address] Delete Address Failure',
+  props<{ error: string }>()
+);
+//create
+export const createAddress = createAction(
+  '[Address] Create Address',
+  props<{ address: Address }>()
+);
+export const createAddressSuccess = createAction(
+  '[Address] Create Address Success',
+  props<{ address: Address }>()
+);
+export const createAddressFailure = createAction(
+  '[Address] Create Address Failure',
   props<{ error: string }>()
 );

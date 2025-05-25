@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AddressActions from './address.actions';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import { AddressApiService } from 'src/app/core/service/address-api.service';
+import { AddressApiService } from 'src/app/service/address-api.service';
 
 @Injectable()
 export class AddressEffects {
@@ -37,6 +37,23 @@ export class AddressEffects {
           map(() => AddressActions.deleteAddressSuccess({ id })),
           catchError((error) =>
             of(AddressActions.deleteAddressFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
+
+  //create
+  createAddress$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AddressActions.createAddress),
+      mergeMap(({ address }) =>
+        this.addressApi.createAddress(address).pipe(
+          map((created) =>
+            AddressActions.createAddressSuccess({ address: created })
+          ),
+          catchError((error) =>
+            of(AddressActions.createAddressFailure({ error: error.message }))
           )
         )
       )

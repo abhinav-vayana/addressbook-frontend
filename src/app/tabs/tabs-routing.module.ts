@@ -5,11 +5,6 @@ import { TabsPage } from './tabs.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabs/address',
-    pathMatch: 'full',
-  },
-  {
-    path: 'tabs',
     component: TabsPage,
     children: [
       {
@@ -18,9 +13,11 @@ const routes: Routes = [
           import('../address/address.module').then((m) => m.AddressPageModule),
       },
       {
-        path: 'tab2',
+        path: 'create',
         loadChildren: () =>
-          import('../tab2/tab2.module').then((m) => m.Tab2PageModule),
+          import('../address-create/address-create.module').then(
+            (m) => m.AddresssCreateModule
+          ),
       },
     ],
   },

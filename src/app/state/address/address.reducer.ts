@@ -41,5 +41,18 @@ export const addressReducer = createReducer(
     ...state,
     loading: false,
     error,
+  })),
+
+  //create
+  on(AddressActions.createAddressSuccess, (state, { address }) => ({
+    ...state,
+    addresses: [...state.addresses, address],
+    loading: false,
+    error: null,
+  })),
+  on(AddressActions.createAddressFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
   }))
 );

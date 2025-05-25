@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Address</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+    <ion-item
+      *ngFor="let field of ['firstname', 'lastname', 'email', 'phonenumber', 'address']"
+    >
+      <ion-label position="floating">{{ field | titlecase }}</ion-label>
+      <ion-input
+        [type]="field === 'email' ? 'email' : 'text'"
+        formControlName="{{field}}"
+      ></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit" [disabled]="addressForm.invalid"
+      >Submit</ion-button
+    >
+  </form>
+</ion-content>
