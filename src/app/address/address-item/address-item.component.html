@@ -1,13 +1,35 @@
 <ion-card button (click)="onClick()">
-  <ion-card-content class="address-content">
-    <div class="info">
-      <div>
-        <strong>{{ name }}</strong>
-      </div>
-      <div>{{ phone }}</div>
-    </div>
-    <ion-button fill="clear" color="danger" (click)="onDelete()">
-      <ion-icon name="trash-outline"></ion-icon>
-    </ion-button>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <!-- Info section -->
+        <ion-col size="9">
+          <div>
+            <strong>{{ name }}</strong>
+          </div>
+          <div>{{ phone }}</div>
+        </ion-col>
+
+        <ion-col size="3">
+          <ion-row class="ion-justify-content-end ion-align-items-center">
+            <ion-button
+              fill="clear"
+              color="primary"
+              (click)="onEdit(); $event.stopPropagation()"
+            >
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+
+            <ion-button
+              fill="clear"
+              color="danger"
+              (click)="onDelete(); $event.stopPropagation()"
+            >
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card-content>
 </ion-card>

@@ -53,3 +53,16 @@ export const loadAddressFailure = createAction(
   '[Address] Load Address Failure',
   props<{ error: string }>()
 );
+//update address
+export const updateAddress = createAction(
+  '[Address] Update Address',
+  props<{ address: Address }>()
+);
+export const updateAddressSuccess = createAction(
+  '[Address] Update Address Success',
+  props<{ address: Address }>()
+);
+export const updateAddressFailure = createAction(
+  '[Address] Update Address Failure',
+  props<{ error: string }>()
+);

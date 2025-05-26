@@ -28,4 +28,7 @@ export class AddressPage implements OnInit {
   onDeleteAddress(id: string) {
     this.store.dispatch(AddressActions.deleteAddress({ id }));
   }
+  onEditAddress(id: string) {
+    this.router.navigate(['/tabs/address/edit', id]);
+  }
 }

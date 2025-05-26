@@ -27,6 +27,9 @@ export class AddressApiService {
 
     return this.http.post<Address>(`${this.baseUrl}`, newAddress);
   }
+  updateAddress(address: Address): Observable<Address> {
+    return this.http.put<Address>(`${this.baseUrl}/${address.id}`, address);
+  }
 }
 function generateUUID(): string {
   // UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx

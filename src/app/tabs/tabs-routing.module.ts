@@ -24,6 +24,13 @@ const routes: Routes = [
                 (m) => m.AddressDetailPageModule
               ),
           },
+          {
+            path: 'edit/:id',
+            loadChildren: () =>
+              import('../address-create/address-create.module').then(
+                (m) => m.AddresssCreateModule
+              ),
+          },
         ],
       },
       {
@@ -33,6 +40,7 @@ const routes: Routes = [
             (m) => m.AddresssCreateModule
           ),
       },
+
       {
         path: '',
         redirectTo: 'address',

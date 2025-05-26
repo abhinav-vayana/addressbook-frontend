@@ -74,4 +74,21 @@ export class AddressEffects {
       )
     )
   );
+
+  //update
+  updateAddress$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AddressActions.updateAddress),
+      mergeMap(({ address }) =>
+        this.addressApi.updateAddress(address).pipe(
+          map((updatedAddress) =>
+            AddressActions.updateAddressSuccess({ address: updatedAddress })
+          ),
+          catchError((error) =>
+            of(AddressActions.updateAddressFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
 }

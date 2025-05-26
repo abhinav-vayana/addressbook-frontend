@@ -15,10 +15,15 @@ export class AddressItemComponent implements OnInit {
   @Input() phone!: string;
   @Output() delete = new EventEmitter<string>();
   @Output() viewDetails = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<string>();
+
   onClick() {
     this.viewDetails.emit(this.id);
   }
   onDelete() {
     this.delete.emit(this.id);
+  }
+  onEdit() {
+    this.edit.emit(this.id);
   }
 }
