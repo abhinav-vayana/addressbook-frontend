@@ -38,3 +38,18 @@ export const createAddressFailure = createAction(
   '[Address] Create Address Failure',
   props<{ error: string }>()
 );
+//get single address
+export const loadAddress = createAction(
+  '[Address] Load Address',
+  props<{ id: string }>()
+);
+
+export const loadAddressSuccess = createAction(
+  '[Address] Load Address Success',
+  props<{ address: Address }>()
+);
+
+export const loadAddressFailure = createAction(
+  '[Address] Load Address Failure',
+  props<{ error: string }>()
+);

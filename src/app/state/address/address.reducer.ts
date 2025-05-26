@@ -6,6 +6,7 @@ const initialState: AddressState = {
   addresses: [],
   loading: false,
   error: null,
+  selectedAddress: null,
 };
 
 export const addressReducer = createReducer(
@@ -52,6 +53,26 @@ export const addressReducer = createReducer(
   })),
   on(AddressActions.createAddressFailure, (state, { error }) => ({
     ...state,
+    loading: false,
+    error,
+  })),
+  // Load Single
+  on(AddressActions.loadAddress, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+    selectedAddress: null,
+  })),
+
+  on(AddressActions.loadAddressSuccess, (state, { address }) => ({
+    ...state,
+    selectedAddress: address,
+    loading: false,
+  })),
+
+  on(AddressActions.loadAddressFailure, (state, { error }) => ({
+    ...state,
+    selectedAddress: null,
     loading: false,
     error,
   }))

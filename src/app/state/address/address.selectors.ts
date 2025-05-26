@@ -16,3 +16,8 @@ export const selectError = createSelector(
   selectAddressState,
   (state) => state.error
 );
+
+export const selectSelectedAddress = createSelector(
+  selectAddressState,
+  (state) => state.selectedAddress
+);

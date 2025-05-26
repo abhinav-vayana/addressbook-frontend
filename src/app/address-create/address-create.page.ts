@@ -11,13 +11,6 @@ import { createAddress } from 'src/app/state/address/address.actions';
 })
 export class AddressCreateComponent {
   isSubmitted = false;
-  fieldLabels: { [key: string]: string } = {
-    firstname: 'First name',
-    lastname: 'Last name',
-    email: 'Email',
-    phonenumber: 'Phone number',
-    address: 'Address',
-  };
 
   addressForm: FormGroup;
 
@@ -40,8 +33,11 @@ export class AddressCreateComponent {
       this.store.dispatch(createAddress({ address: this.addressForm.value }));
       this.isSubmitted = true;
       setTimeout(() => {
+        this.isSubmitted = false;
         this.router.navigate(['/tabs/address']);
       }, 1000); // Delay to allow users to see the button change
+
+      this.addressForm.reset();
     }
   }
 

@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/address"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Address Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="address$ | async as address">
+  <ion-list>
+    <ion-item
+      ><strong>Name:</strong> {{ address.firstname }} {{ address.lastname
+      }}</ion-item
+    >
+    <ion-item><strong>Email:</strong> {{ address.email }}</ion-item>
+    <ion-item><strong>Phone:</strong> {{ address.phonenumber }}</ion-item>
+    <ion-item><strong>Address:</strong> {{ address.address }}</ion-item>
+  </ion-list>
+</ion-content>

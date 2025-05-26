@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { AddressItemComponent } from '../address/address-item/address-item.component';
-import { AddressPage } from '../address/address.page';
 
 const routes: Routes = [
   {
@@ -10,14 +8,23 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: '',
-        loadChildren: () =>
-          import('../address/address.module').then((m) => m.AddressPageModule),
-      },
-      {
         path: 'address',
-        loadChildren: () =>
-          import('../address/address.module').then((m) => m.AddressPageModule),
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../address/address.module').then(
+                (m) => m.AddressPageModule
+              ),
+          },
+          {
+            path: 'detail/:id',
+            loadChildren: () =>
+              import('../address/address-detail/address-detail.module').then(
+                (m) => m.AddressDetailPageModule
+              ),
+          },
+        ],
       },
       {
         path: 'create',
@@ -26,11 +33,17 @@ const routes: Routes = [
             (m) => m.AddresssCreateModule
           ),
       },
+      {
+        path: '',
+        redirectTo: 'address',
+        pathMatch: 'full',
+      },
     ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class TabsPageRoutingModule {}

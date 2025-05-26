@@ -11,4 +11,5 @@ export interface AddressState {
   addresses: Address[];
   loading: boolean;
   error: string | null;
+  selectedAddress: Address | null;
 }

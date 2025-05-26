@@ -12,6 +12,10 @@ export class AddressApiService {
   getAllAddress(): Observable<Address[]> {
     return this.http.get<Address[]>(`${this.baseUrl}`);
   }
+  getAddressById(id: string): Observable<Address> {
+    return this.http.get<Address>(`${this.baseUrl}/${id}`);
+  }
+
   deleteAddress(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }

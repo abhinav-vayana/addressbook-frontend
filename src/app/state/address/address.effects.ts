@@ -59,4 +59,19 @@ export class AddressEffects {
       )
     )
   );
+
+  //get single address
+  loadAddress$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AddressActions.loadAddress),
+      mergeMap(({ id }) =>
+        this.addressApi.getAddressById(id).pipe(
+          map((address) => AddressActions.loadAddressSuccess({ address })),
+          catchError((error) =>
+            of(AddressActions.loadAddressFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
 }
