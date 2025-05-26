@@ -16,6 +16,22 @@ export class AddressApiService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
   createAddress(address: Address): Observable<Address> {
-    return this.http.post<Address>(`${this.baseUrl}/create`, address);
+    const newAddress = {
+      ...address,
+      id: generateUUID(),
+    };
+
+    return this.http.post<Address>(`${this.baseUrl}`, newAddress);
   }
+}
+function generateUUID(): string {
+  // UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+    /[xy]/g,
+    function (char) {
+      const rand = (Math.random() * 16) | 0;
+      const value = char === 'x' ? rand : (rand & 0x3) | 0x8;
+      return value.toString(16);
+    }
+  );
 }

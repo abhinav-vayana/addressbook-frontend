@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [scrollY]="false">
   <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
     <ng-container
       *ngFor="let field of ['firstname', 'lastname', 'email', 'phonenumber', 'address']"
@@ -25,8 +25,13 @@
       </div>
     </ng-container>
 
-    <ion-button expand="full" type="submit" [disabled]="addressForm.invalid">
-      Submit
+    <ion-button
+      expand="full"
+      type="submit"
+      [disabled]="addressForm.invalid || isSubmitted"
+      [attr.color]="isSubmitted?'success':null"
+    >
+      {{ isSubmitted ? 'Submitted' : 'Submit' }}
     </ion-button>
   </form>
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { createAddress } from 'src/app/state/address/address.actions';
 
@@ -9,6 +10,7 @@ import { createAddress } from 'src/app/state/address/address.actions';
   standalone: false,
 })
 export class AddressCreateComponent {
+  isSubmitted = false;
   fieldLabels: { [key: string]: string } = {
     firstname: 'First name',
     lastname: 'Last name',
@@ -19,7 +21,11 @@ export class AddressCreateComponent {
 
   addressForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private store: Store) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private router: Router
+  ) {
     this.addressForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -32,6 +38,10 @@ export class AddressCreateComponent {
   onSubmit() {
     if (this.addressForm.valid) {
       this.store.dispatch(createAddress({ address: this.addressForm.value }));
+      this.isSubmitted = true;
+      setTimeout(() => {
+        this.router.navigate(['/tabs/address']);
+      }, 1000); // Delay to allow users to see the button change
     }
   }
 
