@@ -52,12 +52,15 @@ export class AddressCreateComponent implements OnInit {
       if (this.isEditMode) {
         address.id = this.route.snapshot.paramMap.get('id');
         this.store.dispatch(AddressActions.updateAddress({ address }));
+        this.store.dispatch(AddressActions.loadAddresses());
       } else {
         this.store.dispatch(AddressActions.createAddress({ address }));
       }
 
       this.isSubmitted = true;
       setTimeout(() => {
+        this.isSubmitted = false;
+        this.addressForm.reset();
         this.router.navigate(['/tabs/address']);
       }, 1000);
     }
