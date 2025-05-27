@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AddressActions from './address.actions';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { AddressApiService } from 'src/app/service/address-api.service';
 
 @Injectable()
@@ -69,7 +69,7 @@ export class AddressEffects {
       mergeMap(({ id }) =>
         this.addressApi.getAddressById(id).pipe(
           map((response: any) =>
-            AddressActions.loadAddressSuccess({ address: response.data })
+            AddressActions.loadAddressSuccess({ address: response.data[0] })
           ),
           catchError((error) =>
             of(AddressActions.loadAddressFailure({ error: error.message }))

@@ -14,32 +14,34 @@ export class AddressApiService {
     return this.http.get<Address[]>(`${this.baseUrl}/get`);
   }
   getAddressById(id: string): Observable<Address> {
-    return this.http.get<Address>(`${this.baseUrl}/${id}`);
+    return this.http.get<Address>(`${this.baseUrl}/get/${id}`);
   }
 
   deleteAddress(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
   createAddress(address: Address): Observable<Address> {
     const newAddress = {
       ...address,
-      id: generateUUID(),
     };
 
-    return this.http.post<Address>(`${this.baseUrl}`, newAddress);
+    return this.http.post<Address>(`${this.baseUrl}/create`, newAddress);
   }
   updateAddress(address: Address): Observable<Address> {
-    return this.http.put<Address>(`${this.baseUrl}/${address.id}`, address);
+    return this.http.patch<Address>(
+      `${this.baseUrl}/update/${address.id}`,
+      address
+    );
   }
 }
-function generateUUID(): string {
-  // UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
-    /[xy]/g,
-    function (char) {
-      const rand = (Math.random() * 16) | 0;
-      const value = char === 'x' ? rand : (rand & 0x3) | 0x8;
-      return value.toString(16);
-    }
-  );
-}
+// function generateUUID(): string {
+//   // UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+//   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+//     /[xy]/g,
+//     function (char) {
+//       const rand = (Math.random() * 16) | 0;
+//       const value = char === 'x' ? rand : (rand & 0x3) | 0x8;
+//       return value.toString(16);
+//     }
+//   );
+// }

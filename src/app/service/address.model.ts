@@ -5,4 +5,6 @@ export interface Address {
   email: string;
   phonenumber: string;
   address: string;
+  created_at: string;
+  updated_at: string;
 }
