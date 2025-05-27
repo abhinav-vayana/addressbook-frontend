@@ -11,14 +11,14 @@ export class AddressEffects {
     private addressApi: AddressApiService
   ) {}
 
-  // Load
+  // Load all addresses
   loadAddresses$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AddressActions.loadAddresses),
       mergeMap(() =>
         this.addressApi.getAllAddress().pipe(
-          map((addresses) =>
-            AddressActions.loadAddressesSuccess({ addresses })
+          map((response: any) =>
+            AddressActions.loadAddressesSuccess({ addresses: response.data })
           ),
           catchError((error) =>
             of(AddressActions.loadAddressesFailure({ error: error.message }))
@@ -28,13 +28,15 @@ export class AddressEffects {
     )
   );
 
-  // Delete
+  // Delete address
   deleteAddress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AddressActions.deleteAddress),
       mergeMap(({ id }) =>
         this.addressApi.deleteAddress(id).pipe(
-          map(() => AddressActions.deleteAddressSuccess({ id })),
+          map(
+            () => AddressActions.deleteAddressSuccess({ id }) // assuming response.data returns the ID
+          ),
           catchError((error) =>
             of(AddressActions.deleteAddressFailure({ error: error.message }))
           )
@@ -43,7 +45,7 @@ export class AddressEffects {
     )
   );
 
-  //create
+  // Create address
   createAddress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AddressActions.createAddress),
@@ -60,13 +62,15 @@ export class AddressEffects {
     )
   );
 
-  //get single address
+  // Get single address
   loadAddress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AddressActions.loadAddress),
       mergeMap(({ id }) =>
         this.addressApi.getAddressById(id).pipe(
-          map((address) => AddressActions.loadAddressSuccess({ address })),
+          map((response: any) =>
+            AddressActions.loadAddressSuccess({ address: response.data })
+          ),
           catchError((error) =>
             of(AddressActions.loadAddressFailure({ error: error.message }))
           )
@@ -75,7 +79,7 @@ export class AddressEffects {
     )
   );
 
-  //update
+  // Update address
   updateAddress$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AddressActions.updateAddress),

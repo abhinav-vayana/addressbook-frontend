@@ -7,10 +7,11 @@ import { Address } from './address.model';
   providedIn: 'root',
 })
 export class AddressApiService {
-  private baseUrl = ' http://localhost:3000/addressbook';
+  // private baseUrl = ' http://localhost:3000/addressbook';
+  private baseUrl = ' http://127.0.0.1:8080/addressbook/api';
   constructor(private http: HttpClient) {}
   getAllAddress(): Observable<Address[]> {
-    return this.http.get<Address[]>(`${this.baseUrl}`);
+    return this.http.get<Address[]>(`${this.baseUrl}/get`);
   }
   getAddressById(id: string): Observable<Address> {
     return this.http.get<Address>(`${this.baseUrl}/${id}`);
